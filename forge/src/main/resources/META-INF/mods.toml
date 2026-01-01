@@ -1,0 +1,28 @@
+modLoader = "javafml"
+loaderVersion = "[47,)"
+issueTrackerURL = "https://github.com/DialingSpoon527/StandaloneVC/issues"
+license = "MIT"
+
+[[mods]]
+modId = "standalonevc"
+version = "${version}"
+displayName = "Standalone VC"
+authors = "DialingSpoon527"
+description = '''
+A Minecraft Simple Voice Chat disconnected server.
+'''
+logoFile = "icon.png"
+
+[[dependencies.standalonevc]]
+modId = "forge"
+mandatory = true
+versionRange = "(46,48)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.standalonevc]]
+modId = "minecraft"
+mandatory = true
+versionRange = "(1.20.0,1.20.2)"
+ordering = "NONE"
+side = "BOTH"

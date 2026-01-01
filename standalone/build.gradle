@@ -1,0 +1,16 @@
+plugins {
+    id 'java'
+    id 'com.gradleup.shadow'
+}
+
+java {
+    toolchain.languageVersion = JavaLanguageVersion.of(17)
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation(files("libs/voicechat.jar"))
+}

@@ -1,0 +1,17 @@
+{
+  "required": true,
+  "package": "net.dialingspoon.standalonevc.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "minVersion": "0.8",
+  "mixins": [
+    "ServerConfigMixin",
+    "ServerGroupManagerMixin",
+    "ServerLoginPacketListenerImplMixin",
+    "ServerLoginPacketListenerImplThreadMixin",
+    "ServerVoiceEventsMixin",
+    "VoicechatServerMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

@@ -1,0 +1,12 @@
+[20:14:53] [main/WARN]: [voicechat/Voicechat] Running in debug mode - Don't leave this enabled in production!
+[20:14:53] [main/INFO]: [voicechat/Voicechat] Compatibility version 20
+[20:14:53] [main/INFO]: [voicechat/PluginManager] Loading plugins
+[20:14:53] [main/INFO]: [voicechat/PluginManager] Loaded 0 plugin(s)
+[20:14:53] [main/INFO]: [voicechat/PluginManager] Initializing plugins
+[20:14:53] [main/INFO]: [voicechat/PluginManager] Initialized 0 plugin(s)
+[20:14:53] [nioEventLoopGroup-2-1/INFO]: [voicechat/MinimalMcClient] Connecting to :25565
+[20:14:53] [nioEventLoopGroup-2-1/INFO]: [voicechat/PacketHandler] Entered PLAY state
+[20:14:53] [nioEventLoopGroup-2-1/ERROR]: Unknown packet minecraft:register
+[20:14:53] [nioEventLoopGroup-2-1/ERROR]: [voicechat/PacketHandler] Server Disconnect {"text":"Invalid auth"}
+[20:14:53] [nioEventLoopGroup-2-1/WARN]: [voicechat/PacketHandler] Connection lost
+[20:14:53] [nioEventLoopGroup-2-1/INFO]: [voicechat/MinimalMcClient] Reconnecting in 10 seconds...

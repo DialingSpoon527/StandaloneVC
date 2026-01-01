@@ -1,0 +1,15 @@
+architectury {
+    common rootProject.enabled_platforms.split(',')
+}
+
+dependencies {
+    compileOnly project(':standalone')
+
+    modImplementation "net.fabricmc:fabric-loader:$rootProject.fabric_loader_version"
+
+    modCompileOnly files("libs/voicechat.jar")
+}
+
+loom {
+    accessWidenerPath= file("src/main/resources/standalonevc.accesswidener")
+}

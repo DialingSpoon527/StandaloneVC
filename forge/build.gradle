@@ -1,0 +1,87 @@
+plugins {
+    id 'com.gradleup.shadow'
+}
+
+loom {
+    forge {
+        mixinConfig "standalonevc.forge.mixins.json"
+        mixinConfig "standalonevc.mixins.json"
+    }
+}
+
+architectury {
+    platformSetupLoomIde()
+    forge()
+}
+
+configurations {
+    common {
+        canBeResolved = true
+        canBeConsumed = false
+    }
+    compileClasspath.extendsFrom common
+    runtimeClasspath.extendsFrom common
+    developmentForge.extendsFrom common
+
+    embed {
+        canBeResolved = true
+        canBeConsumed = false
+    }
+
+    shadowBundle {
+        canBeResolved = true
+        canBeConsumed = false
+    }
+}
+
+dependencies {
+    implementation(files("libs/voicechat.jar"))
+    forge "net.minecraftforge:forge:$rootProject.forge_version"
+
+    common(project(path: ':standalone', configuration: 'namedElements')) { transitive false }
+    shadowBundle(project(path: ':standalone')) { transitive false }
+    common(project(path: ':common', configuration: 'namedElements')) { transitive false }
+    shadowBundle project(path: ':common', configuration: 'transformProductionForge')
+
+    embed('io.netty:netty-codec-base:4.2.5.Final')
+    embed('org.apache.logging.log4j:log4j-core:2.19.0')
+}
+
+processResources {
+    inputs.property 'version', project.version
+
+    filesMatching('META-INF/mods.toml') {
+        expand version: project.version
+    }
+}
+
+tasks.register("injectEmbeddedJars") {
+    dependsOn tasks.named("shadowJar")
+
+    doLast {
+        def shadow = tasks.named("shadowJar").get()
+        def outputJar = shadow.archiveFile.get().asFile.toPath()
+
+        def sources = []
+        def targetPaths = []
+
+        configurations.embed.resolve().each { File dep ->
+            sources << dep.toPath()
+            targetPaths << "META-INF/jars/${dep.name}".toString()
+        }
+
+        JarInjector.injectAll(outputJar, sources, targetPaths)
+        println "Injected ${sources.size()} embedded JARs in one pass"
+    }
+
+}
+
+shadowJar {
+    configurations = [project.configurations.shadowBundle]
+    archiveClassifier = 'dev-shadow'
+}
+
+remapJar {
+    input.set shadowJar.archiveFile
+    dependsOn tasks.named("injectEmbeddedJars")
+}
